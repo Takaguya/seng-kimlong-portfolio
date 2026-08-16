@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seng Kimlong — AI Engineer & Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e14;
+    --bg-alt:#0d1219;
+    --bg-cell:#121822;
+    --bg-cell-bar:#171e2a;
+    --border:#232b38;
+    --border-soft:#1a212c;
+    --text:#e8edf4;
+    --text-soft:#a3afbf;
+    --text-dim:#5c6675;
+    --cyan:#6fe3d6;
+    --amber:#f2c06e;
+    --green:#8fd19e;
+    --rose:#ea8f8f;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'Inter',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  body{
+    background-image:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(111,227,214,0.07), transparent),
+      radial-gradient(ellipse 700px 400px at 100% 10%, rgba(242,192,110,0.05), transparent);
+  }
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+  section{padding:96px 24px;}
+  .wrap{max-width:var(--maxw);margin:0 auto;}
+
+  ::selection{background:var(--cyan);color:#06110f;}
+
+  a:focus-visible, label:focus-visible, .btn:focus-visible{
+    outline:2px solid var(--cyan);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  .tag{
+    font-family:var(--font-mono);
+    color:var(--cyan);
+    font-size:0.85rem;
+    letter-spacing:0.02em;
+    margin-bottom:14px;
+  }
+  .section-title{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(1.6rem, 2.4vw, 2.2rem);
+    max-width:640px;
+    margin-bottom:44px;
+    letter-spacing:-0.01em;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav-toggle-input{display:none;}
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,14,20,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;
+  }
+  .logo{
+    font-family:var(--font-mono);
+    font-weight:600;
+    font-size:1.05rem;
+    color:var(--text);
+  }
+  .blink{
+    color:var(--cyan);
+    animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  .nav-links{display:flex;gap:28px;}
+  .nav-links a{
+    font-family:var(--font-mono);
+    font-size:0.86rem;
+    color:var(--text-soft);
+    transition:color 0.15s ease;
+  }
+  .nav-links a:hover{color:var(--cyan);}
+  .nav-burger{
+    display:none;flex-direction:column;gap:4px;cursor:pointer;padding:6px;
+  }
+  .nav-burger span{width:20px;height:2px;background:var(--text-soft);display:block;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:72px;padding-bottom:80px;}
+  .hero-inner{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:0.82rem;
+    color:var(--text-dim);
+    text-transform:lowercase;
+    margin-bottom:18px;
+  }
+  .hero-title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(2.6rem, 6vw, 4.2rem);
+    line-height:1.02;
+    letter-spacing:-0.02em;
+  }
+  .hero-role{
+    font-family:var(--font-mono);
+    color:var(--cyan);
+    font-size:1.05rem;
+    margin-top:14px;
+  }
+  .hero-desc{
+    color:var(--text-soft);
+    font-size:1.05rem;
+    max-width:460px;
+    margin-top:22px;
+  }
+  .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-mono);
+    font-size:0.88rem;
+    padding:12px 22px;
+    border-radius:6px;
+    display:inline-block;
+    transition:transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .btn-primary{background:var(--cyan);color:#06110f;font-weight:600;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--border);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+  .hero-langs{
+    display:flex;gap:20px;margin-top:38px;
+    font-family:var(--font-mono);font-size:0.78rem;color:var(--text-dim);
+    flex-wrap:wrap;
+  }
+  .hero-langs span{border-left:2px solid var(--border);padding-left:10px;}
+
+  /* ---------- CELL (notebook) styling, reused ---------- */
+  .cell-bar{
+    display:flex;align-items:center;gap:8px;
+    background:var(--bg-cell-bar);
+    padding:10px 14px;
+    border-bottom:1px solid var(--border);
+    border-radius:10px 10px 0 0;
+  }
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .dot.red{background:#e0716f;}
+  .dot.amber{background:var(--amber);}
+  .dot.green{background:var(--green);}
+  .cell-title{
+    font-family:var(--font-mono);font-size:0.76rem;color:var(--text-dim);
+    margin-left:6px;
+  }
+  .cell-year{
+    font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim);
+    margin-left:auto;
+  }
+  .hero-cell{
+    background:var(--bg-cell);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .cell-code{
+    font-family:var(--font-mono);
+    font-size:0.86rem;
+    padding:22px 20px;
+    overflow-x:auto;
+    color:var(--text-soft);
+  }
+  .cell-code .kw{color:var(--rose);}
+  .cell-code .cmt{color:var(--text-dim);}
+  .cell-code .out{color:var(--green);}
+  .cell-code .prompt{color:var(--cyan);}
+
+  /* ---------- ABOUT ---------- */
+  .about-body{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:start;}
+  .about-text p{color:var(--text-soft);font-size:1.02rem;max-width:520px;}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .stat-card{
+    background:var(--bg-alt);border:1px solid var(--border-soft);
+    border-radius:10px;padding:20px;
+  }
+  .stat-num{font-family:var(--font-display);font-weight:700;font-size:1.5rem;color:var(--cyan);}
+  .stat-label{font-family:var(--font-mono);font-size:0.76rem;color:var(--text-dim);margin-top:6px;}
+
+  /* ---------- EXPERIENCE (git log timeline) ---------- */
+  .timeline{position:relative;padding-left:28px;}
+  .timeline::before{
+    content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;
+    background:linear-gradient(var(--border), transparent);
+  }
+  .commit{position:relative;padding-bottom:44px;}
+  .commit:last-child{padding-bottom:0;}
+  .commit-marker{
+    position:absolute;left:-28px;top:4px;width:11px;height:11px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--cyan);
+  }
+  .commit:nth-child(2) .commit-marker{border-color:var(--text-dim);}
+  .commit-head{
+    display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  }
+  .commit-head h3{font-family:var(--font-display);font-size:1.2rem;font-weight:600;}
+  .commit-date{font-family:var(--font-mono);font-size:0.8rem;color:var(--text-dim);}
+  .commit-org{font-family:var(--font-mono);color:var(--cyan);font-size:0.85rem;margin-top:4px;}
+  .commit ul{margin-top:14px;display:flex;flex-direction:column;gap:8px;}
+  .commit li{
+    color:var(--text-soft);font-size:0.96rem;padding-left:18px;position:relative;
+  }
+  .commit li::before{
+    content:"+";position:absolute;left:0;color:var(--green);font-family:var(--font-mono);
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .project-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .project-cell{
+    background:var(--bg-cell);border:1px solid var(--border);border-radius:10px;overflow:hidden;
+  }
+  .cell-content{padding:22px;}
+  .cell-content h3{font-family:var(--font-display);font-size:1.15rem;font-weight:600;}
+  .cell-context{
+    font-family:var(--font-mono);font-size:0.76rem;color:var(--text-dim);margin-top:4px;margin-bottom:16px;
+  }
+  .io-row{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start;}
+  .io-label{
+    font-family:var(--font-mono);font-size:0.72rem;font-weight:600;
+    padding:2px 8px;border-radius:4px;flex-shrink:0;margin-top:2px;
+  }
+  .io-label.in{color:var(--cyan);border:1px solid rgba(111,227,214,0.35);}
+  .io-label.out{color:var(--amber);border:1px solid rgba(242,192,110,0.35);}
+  .io-row p{color:var(--text-soft);font-size:0.92rem;}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .tags span{
+    font-family:var(--font-mono);font-size:0.72rem;color:var(--text-soft);
+    background:var(--bg-alt);border:1px solid var(--border-soft);
+    padding:4px 10px;border-radius:20px;
+  }
+  .project-link{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:var(--font-mono);font-size:0.78rem;color:var(--cyan);
+    margin-top:18px;padding-top:16px;border-top:1px solid var(--border-soft);
+    width:100%;transition:color 0.15s ease;
+  }
+  .project-link:hover{color:var(--text);}
+  .project-link svg{width:12px;height:12px;flex-shrink:0;}
+
+  /* ---------- FEATURED PROJECT (Power BI–style dashboard mockup) ---------- */
+  .project-featured{
+    background:var(--bg-cell);border:1px solid var(--border);border-radius:10px;
+    overflow:hidden;margin-bottom:22px;
+  }
+  .pbi-frame{
+    background:#f3f2f1;
+    border:1px solid #e1dfdd;
+    border-radius:8px;
+    margin:0 22px 6px;
+    overflow:hidden;
+  }
+  .pbi-topbar{
+    display:flex;align-items:center;gap:10px;
+    background:#ffffff;
+    padding:10px 14px;
+    border-bottom:1px solid #e1dfdd;
+  }
+  .pbi-logo{
+    width:14px;height:14px;border-radius:3px;flex-shrink:0;
+    background:conic-gradient(#F2C80F 0deg 120deg, #118DFF 120deg 240deg, #01B8AA 240deg 360deg);
+  }
+  .pbi-topbar-title{font-size:0.82rem;font-weight:600;color:#201f1e;font-family:var(--font-body);}
+  .pbi-topbar-icons{margin-left:auto;display:flex;gap:12px;}
+  .pbi-topbar-icons svg{width:14px;height:14px;color:#605e5c;}
+  .pbi-body{padding:16px;}
+  .pbi-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;}
+  .pbi-kpi{
+    background:#ffffff;border:1px solid #e1dfdd;border-radius:4px;
+    padding:12px 14px;box-shadow:0 1px 2px rgba(0,0,0,0.04);
+  }
+  .pbi-kpi-num{
+    font-family:var(--font-body);font-size:1.4rem;font-weight:700;color:#201f1e;
+    display:flex;align-items:baseline;gap:6px;
+  }
+  .pbi-kpi-trend{font-size:0.7rem;font-weight:600;}
+  .pbi-kpi-trend.up{color:#107C10;}
+  .pbi-kpi-label{font-family:var(--font-body);font-size:0.7rem;color:#605e5c;margin-top:4px;}
+  .pbi-slicer{
+    display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+    background:#ffffff;border:1px solid #e1dfdd;border-radius:4px;
+    padding:9px 12px;margin-bottom:12px;
+  }
+  .pbi-slicer-label{
+    font-family:var(--font-body);font-size:0.68rem;color:#605e5c;
+    text-transform:uppercase;letter-spacing:0.03em;margin-right:6px;
+  }
+  .pbi-chip{
+    font-family:var(--font-body);font-size:0.72rem;color:#323130;
+    background:#f3f2f1;border:1px solid #e1dfdd;border-radius:3px;
+    padding:4px 10px;
+  }
+  .pbi-chip.active{background:#118DFF;border-color:#118DFF;color:#ffffff;}
+  .pbi-charts{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .pbi-chart{
+    background:#ffffff;border:1px solid #e1dfdd;border-radius:4px;padding:12px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.04);
+  }
+  .pbi-chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .pbi-chart-title{font-family:var(--font-body);font-size:0.74rem;font-weight:600;color:#201f1e;}
+  .pbi-chart-more{color:#a19f9d;font-size:0.85rem;letter-spacing:1px;}
+  .pbi-chart svg{width:100%;height:auto;display:block;}
+  .pbi-shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .pbi-shot{background:#ffffff;border:1px solid #e1dfdd;border-radius:4px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.04);}
+  .pbi-shot img{width:100%;height:auto;display:block;border-bottom:1px solid #e1dfdd;}
+  .pbi-shot figcaption{
+    font-family:var(--font-body);font-size:0.72rem;color:#605e5c;padding:8px 10px;
+  }
+  .pbi-section-label{
+    font-family:var(--font-body);font-size:0.72rem;font-weight:600;color:#605e5c;
+    text-transform:uppercase;letter-spacing:0.04em;margin:18px 0 10px;
+  }
+  .pbi-insights{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .pbi-insight{
+    background:#ffffff;border:1px solid #e1dfdd;border-radius:4px;padding:12px 14px;
+    box-shadow:0 1px 2px rgba(0,0,0,0.04);
+  }
+  .pbi-insight-title{font-family:var(--font-body);font-size:0.78rem;font-weight:600;color:#201f1e;margin-bottom:4px;}
+  .pbi-insight-text{font-family:var(--font-body);font-size:0.78rem;color:#605e5c;line-height:1.5;}
+  .dash-caption{
+    font-family:var(--font-mono);font-size:0.7rem;color:var(--text-dim);
+    padding:16px 22px 22px;font-style:italic;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .skill-card{
+    background:var(--bg-alt);border:1px solid var(--border-soft);border-radius:10px;padding:22px;
+  }
+  .import-line{font-family:var(--font-mono);font-size:0.86rem;margin-bottom:16px;color:var(--text-soft);}
+  .import-line .kw{color:var(--rose);}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .pills span{
+    font-family:var(--font-mono);font-size:0.78rem;
+    background:var(--bg-cell);border:1px solid var(--border);
+    padding:6px 12px;border-radius:6px;color:var(--text);
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-grid{display:grid;grid-template-columns:0.9fr 1.4fr;gap:48px;}
+  .edu-main h3{font-family:var(--font-display);font-size:1.25rem;font-weight:600;}
+  .edu-main p{font-family:var(--font-mono);color:var(--text-dim);font-size:0.85rem;margin-top:8px;}
+  .courses{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .course-group h4{
+    font-family:var(--font-mono);color:var(--cyan);font-size:0.82rem;margin-bottom:10px;
+  }
+  .course-group li{color:var(--text-soft);font-size:0.88rem;padding:5px 0;border-top:1px solid var(--border-soft);}
+  .course-group li:first-child{border-top:none;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-desc{color:var(--text-soft);margin-bottom:32px;max-width:480px;}
+  .terminal{
+    background:var(--bg-cell);border:1px solid var(--border);border-radius:10px;overflow:hidden;max-width:560px;
+  }
+  .terminal .cell-code a{color:var(--cyan);border-bottom:1px dotted var(--cyan);}
+  .terminal .cell-code a:hover{color:var(--text);}
+
+  /* ---------- FOOTER ---------- */
+  .footer{
+    padding:36px 24px;border-top:1px solid var(--border-soft);
+    text-align:center;
+  }
+  .footer p{font-family:var(--font-mono);font-size:0.78rem;color:var(--text-dim);}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease, transform 0.6s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    .blink{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .hero-inner{grid-template-columns:1fr;gap:40px;}
+    .about-body{grid-template-columns:1fr;}
+    .edu-grid{grid-template-columns:1fr;gap:28px;}
+    .courses{grid-template-columns:1fr 1fr;}
+    .project-grid{grid-template-columns:1fr;}
+    .pbi-kpis{grid-template-columns:1fr;}
+    .pbi-charts{grid-template-columns:1fr;}
+    .pbi-shots{grid-template-columns:1fr;}
+    .pbi-insights{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+    .nav-links{
+      position:absolute;top:100%;left:0;right:0;
+      background:var(--bg-alt);border-bottom:1px solid var(--border-soft);
+      flex-direction:column;gap:0;
+      max-height:0;overflow:hidden;
+      transition:max-height 0.25s ease;
+    }
+    .nav-links a{padding:14px 24px;border-top:1px solid var(--border-soft);}
+    .nav-burger{display:flex;}
+    .nav-toggle-input:checked ~ .nav .nav-links{max-height:340px;}
+  }
+  @media (max-width:560px){
+    section{padding:64px 20px;}
+    .stat-grid{grid-template-columns:1fr 1fr;}
+    .courses{grid-template-columns:1fr;}
+    .hero-cta{width:100%;}
+    .btn{flex:1;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="logo">sk<span class="blink">_</span></a>
+    <label for="nav-toggle" class="nav-burger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </label>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow">phnom penh, cambodia · open to opportunities</p>
+        <h1 class="hero-title">Seng Kimlong</h1>
+        <p class="hero-role">AI Engineer &amp; Data Scientist</p>
+        <p class="hero-desc">I build machine learning systems that turn raw, messy data into decisions — across banking, healthcare, and computer vision.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">View projects</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+        </div>
+        <div class="hero-langs">
+          <span>Khmer — Native</span>
+          <span>English — Professional</span>
+        </div>
+      </div>
+      <div class="hero-cell">
+        <div class="cell-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="cell-title">profile.ipynb</span></div>
+        <pre class="cell-code"><code><span class="cmt"># load profile</span>
+<span class="kw">import</span> kimlong <span class="kw">as</span> sk
+
+sk.role
+<span class="out">'AI Engineer @ Chip Mong Commercial Bank'</span>
+
+sk.focus
+<span class="out">['LLM automation', 'ML pipelines', 'computer vision']</span>
+
+sk.stack[:4]
+<span class="out">['Python', 'TensorFlow', 'LangChain', 'Power BI']</span></code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="about reveal" id="about">
+    <div class="wrap">
+      <p class="tag">// about</p>
+      <h2 class="section-title">Grounded in data, built for production</h2>
+      <div class="about-body">
+        <div class="about-text">
+          <p>I'm a Data Scientist and AI Engineer with a B.Sc. in Data Science &amp; Artificial Intelligence from CamTech University. My work spans finance, healthcare, and computer vision — from production banking pipelines to self-directed research projects.</p>
+          <p style="margin-top:16px;">Currently at Chip Mong Commercial Bank, I design ML and deep learning models, integrate LLMs through LangChain, and build the data pipelines that keep them fed with clean, well-engineered features — then ship it all into real web applications.</p>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-num">B.Sc.</div><div class="stat-label">Data Science &amp; AI, CamTech University</div></div>
+          <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">domains — finance, healthcare, vision, NLP</div></div>
+          <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">shipped &amp; self-directed projects</div></div>
+          <div class="stat-card"><div class="stat-num">2025</div><div class="stat-label">started full-time as an AI Engineer</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="experience reveal" id="experience">
+    <div class="wrap">
+      <p class="tag">// experience</p>
+      <h2 class="section-title">Where the work happened</h2>
+      <div class="timeline">
+        <article class="commit">
+          <div class="commit-marker"></div>
+          <div class="commit-head">
+            <h3>AI Engineer</h3>
+            <span class="commit-date">2025 — 2026</span>
+          </div>
+          <p class="commit-org">Chip Mong Commercial Bank</p>
+          <ul>
+            <li>Design and develop machine learning and deep learning models for banking use cases</li>
+            <li>Experiment with LLMs using LangChain for intelligent automation</li>
+            <li>Build and maintain data engineering pipelines: cleaning, preprocessing, feature engineering</li>
+            <li>Integrate AI models into web applications via REST APIs</li>
+          </ul>
+        </article>
+        <article class="commit">
+          <div class="commit-marker"></div>
+          <div class="commit-head">
+            <h3>Office &amp; LMS Intern</h3>
+            <span class="commit-date">2024</span>
+          </div>
+          <p class="commit-org">MegaAsset</p>
+          <ul>
+            <li>Managed Learning Management System (LMS) records and admin data</li>
+            <li>Designed a FAQs webpage and maintained internal web data records</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="projects reveal" id="projects">
+    <div class="wrap">
+      <p class="tag">// projects</p>
+      <h2 class="section-title">Notebooks worth reading</h2>
+
+      <article class="project-featured">
+        <div class="cell-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="cell-title">inventory_dashboard.pbix</span><span class="cell-year">2024</span></div>
+        <div class="cell-content">
+          <h3>Inventory Analysis &amp; Sleep Patterns</h3>
+          <p class="cell-context">Self-directed case study · Power BI</p>
+          <div class="io-row"><span class="io-label in">In</span><p>Raw inventory records cleaned and prepared for analysis</p></div>
+          <div class="io-row"><span class="io-label out">Out</span><p>Interactive Power BI dashboards surfacing trends, patterns, and stock forecasting insights</p></div>
+          <div class="tags"><span>Power BI</span><span>Forecasting</span><span>Data Cleaning</span></div>
+        </div>
+        <div class="pbi-frame">
+          <div class="pbi-topbar">
+            <span class="pbi-logo"></span>
+            <span class="pbi-topbar-title">Inventory & Sleep — Dashboard</span>
+            <div class="pbi-topbar-icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></svg>
+            </div>
+          </div>
+          <div class="pbi-body">
+            <p class="pbi-section-label">Inventory — live report pages</p>
+            <div class="pbi-shots">
+              <figure class="pbi-shot">
+                <img src="inventory-dashboard-1.png" alt="Power BI report page showing inventory turnover by item, revenue by item, and quantity by country map">
+                <figcaption>Turnover &amp; revenue by item, with quantity distribution by country and ABC value filter</figcaption>
+              </figure>
+              <figure class="pbi-shot">
+                <img src="inventory-dashboard-2.png" alt="Power BI report page showing total COGS, average inventory turnover, and ABC value class distribution with a Pareto curve">
+                <figcaption>ABC value classification with a Pareto view of revenue concentration</figcaption>
+              </figure>
+            </div>
+
+            <p class="pbi-section-label">Sleep Patterns — key findings</p>
+            <div class="pbi-insights">
+              <div class="pbi-insight">
+                <p class="pbi-insight-title">BMI vs. insomnia</p>
+                <p class="pbi-insight-text">Compared insomnia diagnosis ratios across Normal, Overweight, and Obese BMI categories to identify which group carried the highest risk.</p>
+              </div>
+              <div class="pbi-insight">
+                <p class="pbi-insight-title">Occupation vs. sleep</p>
+                <p class="pbi-insight-text">Calculated average sleep duration and sleep quality by occupation — one profession ranked lowest on both, flagging it as the highest fatigue-risk group.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="dash-caption">Inventory pages are real screenshots exported from the Power BI report. The sleep analysis dashboard isn't available as a screenshot, so its findings are summarized above instead.</p>
+      </article>
+
+      <div class="project-grid">
+
+        <article class="project-cell">
+          <div class="cell-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="cell-title">license_plate_recognition.ipynb</span><span class="cell-year">2023</span></div>
+          <div class="cell-content">
+            <h3>License Plate Recognition</h3>
+            <p class="cell-context">Research Technician Support · CamTech University</p>
+            <div class="io-row"><span class="io-label in">In</span><p>Raw images of Cambodian plates, mixing Khmer and Latin script</p></div>
+            <div class="io-row"><span class="io-label out">Out</span><p>End-to-end recognition pipeline with a structured results store and an iterated accuracy evaluation</p></div>
+            <div class="tags"><span>Computer Vision</span><span>OCR</span><span>Multi-script</span></div>
+          </div>
+        </article>
+
+        <article class="project-cell">
+          <div class="cell-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="cell-title">depression_severity.ipynb</span><span class="cell-year">2024</span></div>
+          <div class="cell-content">
+            <h3>Depression Severity Prediction</h3>
+            <p class="cell-context">PHQ-9 &amp; STSQS survey data</p>
+            <div class="io-row"><span class="io-label in">In</span><p>Collected and preprocessed mental health survey data across two clinical scales</p></div>
+            <div class="io-row"><span class="io-label out">Out</span><p>Tuned classification models evaluated with F1 score and cross-validation</p></div>
+            <div class="tags"><span>Healthcare</span><span>Classification</span><span>F1 Score</span></div>
+          </div>
+        </article>
+
+        <article class="project-cell">
+          <div class="cell-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="cell-title">loan_default.ipynb</span><span class="cell-year">2025</span></div>
+          <div class="cell-content">
+            <h3>Loan Default Prediction — ML &amp; CNN</h3>
+            <p class="cell-context">Self-directed</p>
+            <div class="io-row"><span class="io-label in">In</span><p>Loan application data, refined with feature engineering, scaling, and PCA</p></div>
+            <div class="io-row"><span class="io-label out">Out</span><p>Logistic Regression, Naive Bayes, SVM, and CNN benchmarked and tuned for F1, precision, recall</p></div>
+            <div class="tags"><span>Finance</span><span>CNN</span><span>PCA</span></div>
+            <a class="project-link" href="https://github.com/Takaguya/Loan_prediction" target="_blank" rel="noopener noreferrer">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+          </div>
+        </article>
+
+        <article class="project-cell">
+          <div class="cell-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="cell-title">springAI</span><span class="cell-year">2026</span></div>
+          <div class="cell-content">
+            <h3>Spring AI RAG</h3>
+            <p class="cell-context">Self-directed · Java, Spring Boot, Ollama</p>
+            <div class="io-row"><span class="io-label in">In</span><p>User queries against a local knowledge base</p></div>
+            <div class="io-row"><span class="io-label out">Out</span><p>Retrieval-augmented answers from a fully local LLM — no cloud API calls</p></div>
+            <div class="tags"><span>RAG</span><span>Spring AI</span><span>Ollama</span></div>
+            <a class="project-link" href="https://github.com/Takaguya/springAI" target="_blank" rel="noopener noreferrer">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+          </div>
+        </article>
+
+        <article class="project-cell">
+          <div class="cell-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="cell-title">standup_agent</span><span class="cell-year">2026</span></div>
+          <div class="cell-content">
+            <h3>Standup Agent</h3>
+            <p class="cell-context">Self-directed · Python, FastAPI, MCP</p>
+            <div class="io-row"><span class="io-label in">In</span><p>Raw GitHub/GitLab commit &amp; PR activity</p></div>
+            <div class="io-row"><span class="io-label out">Out</span><p>An LLM-written standup report, served via CLI, web app, or MCP tools for AI agents</p></div>
+            <div class="tags"><span>Agents</span><span>MCP</span><span>FastAPI</span></div>
+            <a class="project-link" href="https://github.com/Takaguya/standup_agent" target="_blank" rel="noopener noreferrer">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="skills reveal" id="skills">
+    <div class="wrap">
+      <p class="tag">// skills</p>
+      <h2 class="section-title">The stack</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <p class="import-line"><span class="kw">from</span> languages <span class="kw">import</span> *</p>
+          <div class="pills"><span>Python</span><span>Java</span><span>SQL / MySQL</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="import-line"><span class="kw">from</span> ml_ai <span class="kw">import</span> *</p>
+          <div class="pills"><span>Scikit-learn</span><span>Keras</span><span>TensorFlow</span><span>LangChain / LLMs</span><span>CNN / Deep Learning</span><span>NLP</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="import-line"><span class="kw">from</span> data_bi <span class="kw">import</span> *</p>
+          <div class="pills"><span>Pandas / NumPy</span><span>Power BI</span><span>Tableau</span><span>Excel / Matplotlib</span><span>Feature Engineering</span><span>PCA / Statistics</span></div>
+        </div>
+        <div class="skill-card">
+          <p class="import-line"><span class="kw">from</span> tools <span class="kw">import</span> *</p>
+          <div class="pills"><span>Jupyter Notebook</span><span>VS Code / Git</span><span>REST API Integration</span><span>Web Integration</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="education reveal" id="education">
+    <div class="wrap">
+      <p class="tag">// education</p>
+      <h2 class="section-title">Education &amp; continued learning</h2>
+      <div class="edu-grid">
+        <div class="edu-main">
+          <h3>B.Sc. Data Science &amp; Artificial Intelligence</h3>
+          <p>CamTech University · 2022 – 2025</p>
+        </div>
+        <div class="courses">
+          <div class="course-group">
+            <h4>DataCamp</h4>
+            <ul>
+              <li>Advanced Deep Learning with Keras</li>
+              <li>Image Modeling with Keras</li>
+              <li>Regression &amp; Linear Modeling in Python</li>
+            </ul>
+          </div>
+          <div class="course-group">
+            <h4>Udemy</h4>
+            <ul>
+              <li>Data Science: Math, Statistics &amp; Python</li>
+              <li>Agentic AI, GenAI &amp; Reinforcement Learning</li>
+            </ul>
+          </div>
+          <div class="course-group">
+            <h4>Anthropic</h4>
+            <ul>
+              <li>Introduction to Agent Skills</li>
+              <li>Intro to Model Context Protocol</li>
+              <li>MCP: Advanced Topics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact reveal" id="contact">
+    <div class="wrap">
+      <p class="tag">// contact</p>
+      <h2 class="section-title">Let's build something</h2>
+      <p class="contact-desc">Open to AI Engineer and Data Scientist roles — reach out directly.</p>
+      <div class="terminal">
+        <div class="cell-bar"><span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span><span class="cell-title">contact.sh</span></div>
+        <pre class="cell-code"><code><span class="prompt">$</span> whoami --contact
+email     <a href="mailto:seng.kimlong439@gmail.com">seng.kimlong439@gmail.com</a>
+phone     <a href="tel:+855714947343">071 494 7343</a>
+location  Phnom Penh, Cambodia</code></pre>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>Seng Kimlong — AI Engineer &amp; Data Scientist · © 2026</p>
+</footer>
+
+<script>
+  // mobile nav: close menu after clicking a link
+  document.querySelectorAll('.nav-links a').forEach(function(link){
+    link.addEventListener('click', function(){
+      document.getElementById('nav-toggle').checked = false;
+    });
+  });
+
+  // scroll reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+</script>
+
+</body>
+</html>
